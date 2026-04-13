@@ -1,0 +1,8 @@
+downloads/
+__pycache__/
+*.pyc
+ffmpeg.exe
+ffprobe.exe
+ffmpeg.zip
+download_ffmpeg.py
+.env
