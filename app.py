@@ -4,6 +4,8 @@ import os
 import threading
 import uuid
 import json
+import shutil
+import subprocess
 
 app = Flask(__name__)
 
@@ -17,6 +19,9 @@ HTML = open(os.path.join(os.path.dirname(__file__), "index.html")).read()
 
 @app.route("/")
 def index():
+    # Quick check for ffmpeg on start (for logs)
+    if not shutil.which("ffmpeg"):
+        print("\n[WARNING] FFmpeg not found! High-quality downloads (1080p+) will fail.\n")
     return render_template_string(HTML)
 
 
@@ -65,6 +70,12 @@ def download():
 
     def run():
         try:
+            # Check for ffmpeg
+            if not shutil.which("ffmpeg"):
+                # If quality is above 720p or audio conversion needed, ffmpeg is MUST
+                if quality in ("1080", "4k") or fmt in ("mp3", "m4a"):
+                    raise Exception("FFmpeg not found on this system. 1080p/4K and MP3 conversion require FFmpeg installed and in your PATH.")
+
             is_audio = fmt in ("mp3", "m4a")
             out_template = os.path.join(DOWNLOAD_DIR, f"{job_id}-----%(title)s.%(ext)s")
 
