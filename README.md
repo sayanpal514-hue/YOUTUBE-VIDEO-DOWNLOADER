@@ -1,60 +1,37 @@
 # YouTube Downloader — Local Web App
 
-A fully working YouTube downloader with a web UI, powered by Flask + yt-dlp.
+A clean, modern YouTube downloader with a web UI, powered by Flask + yt-dlp.
 
-## Requirements
+## Quick Start
 
-- Python 3.7+
-- ffmpeg (for merging video+audio and audio conversion)
-
-## Setup
-
-### 1. Install Python dependencies
+### 1. Install Dependencies
 ```bash
-pip install flask yt-dlp
+pip install -r requirements.txt
 ```
 
-### 2. Install ffmpeg
+### 2. Install FFmpeg (Required for 1080p/4K and MP3)
+- **Windows**: `winget install ffmpeg` (Remember to **restart VS Code** after installing)
+- **Mac**: `brew install ffmpeg`
+- **Linux**: `sudo apt install ffmpeg`
 
-**Windows:**
-```
-winget install ffmpeg
-# or download from https://ffmpeg.org/download.html
-```
-
-**Mac:**
-```bash
-brew install ffmpeg
-```
-
-**Linux (Ubuntu/Debian):**
-```bash
-sudo apt install ffmpeg
-```
-
-### 3. Run the app
+### 3. Run the App
 ```bash
 python app.py
 ```
-
 Then open your browser at: **http://localhost:5000**
 
 ## Features
+-   **High Quality**: Download video in 4K, 1080p, 720p, etc.
+-   **Audio Extraction**: Save as MP3 (320kbps) or M4A.
+-   **Live Progress**: Real-time progress bar and status updates.
+-   **Bot Bypass**: Integrated mobile user-agents and client spoofing.
+-   **Proxy Support**: Support for `PROXY_URL` environment variables.
 
-- Download video in MP4 or WebM at 360p / 480p / 720p / 1080p / 4K
-- Download audio as MP3 (320/192/128kbps) or M4A (256/128kbps)
-- Live progress bar during download
-- One-click "Save file" button when done
-- Fetches video title, channel, thumbnail before downloading
+## Bot Detection (Important)
+If you get a "Sign in to confirm you're not a bot" error:
+1.  Export your `cookies.txt` from YouTube (using a browser extension).
+2.  Place it in the project root.
+3.  The app will automatically detect and use it.
 
-## Files
-
-- `app.py` — Flask backend (API routes + serves HTML)
-- `index.html` — Frontend UI
-- `downloads/` — Downloaded files are saved here (auto-created)
-
-## Notes
-
-- Downloaded files are stored in the `downloads/` folder next to `app.py`
-- The app runs locally — your downloads never leave your machine
-- yt-dlp is updated frequently; run `pip install -U yt-dlp` if a site breaks
+---
+*Note: This app is for legal personal use only.*
