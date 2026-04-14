@@ -40,6 +40,10 @@ def get_info():
             "user_agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Mobile Safari/537.36",
             "nocheckcertificate": True,
         }
+        proxy = os.environ.get("PROXY_URL")
+        if proxy:
+            ydl_opts["proxy"] = proxy
+        
         cookie_path = os.path.join(os.path.dirname(__file__), "cookies.txt")
         if os.path.exists(cookie_path):
             ydl_opts["cookiefile"] = cookie_path
@@ -119,6 +123,10 @@ def download():
                     "user_agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Mobile Safari/537.36",
                     "nocheckcertificate": True,
                 }
+            
+            proxy = os.environ.get("PROXY_URL")
+            if proxy:
+                ydl_opts["proxy"] = proxy
 
             cookie_path = os.path.join(os.path.dirname(__file__), "cookies.txt")
             if os.path.exists(cookie_path):
